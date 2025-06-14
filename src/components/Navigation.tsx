@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { 
   HomeIcon, 
   PlusIcon, 
@@ -11,7 +12,9 @@ import {
   UserIcon,
   Bars3Icon,
   XMarkIcon,
-  ArrowRightOnRectangleIcon
+  ArrowRightOnRectangleIcon,
+  SunIcon,
+  MoonIcon,
 } from '@heroicons/react/24/outline';
 import { 
   Swords,
@@ -34,6 +37,7 @@ export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const { user, signOut } = useAuth();
+  const { theme, toggleTheme, isDark } = useTheme();
 
   if (!user) return null;
 
@@ -77,13 +81,26 @@ export default function Navigation() {
                   })}
                 </ul>
               </li>              <li className="mt-auto">
-                <div className="border-t border-gray-700 pt-4">
-                  <div className="flex items-center gap-x-4 px-3 py-3 text-sm font-medium leading-6 text-gray-300 bg-gray-800/50 rounded-xl">
+                <div className="border-t border-gray-700 pt-4">                  <div className="flex items-center gap-x-4 px-3 py-3 text-sm font-medium leading-6 text-gray-300 bg-gray-800/50 rounded-xl">
                     <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center">
                       <UserIcon className="h-4 w-4 text-white" />
                     </div>
                     <span className="truncate">{user.displayName || user.email}</span>
                   </div>
+                  
+                  {/* Theme Toggle Button */}
+                  <button
+                    onClick={toggleTheme}
+                    className="group flex w-full gap-x-3 rounded-xl p-3 text-sm leading-6 font-medium text-gray-300 hover:text-white hover:bg-indigo-600/20 transition-all duration-200 mt-2"
+                  >
+                    {isDark ? (
+                      <SunIcon className="h-5 w-5 shrink-0 group-hover:scale-110 transition-transform" />
+                    ) : (
+                      <MoonIcon className="h-5 w-5 shrink-0 group-hover:scale-110 transition-transform" />
+                    )}
+                    {isDark ? 'Light Mode' : 'Dark Mode'}
+                  </button>
+                  
                   <button
                     onClick={signOut}
                     className="group flex w-full gap-x-3 rounded-xl p-3 text-sm leading-6 font-medium text-gray-300 hover:text-white hover:bg-red-600/20 transition-all duration-200 mt-2"
@@ -155,11 +172,24 @@ export default function Navigation() {
                           })}
                         </ul>
                       </li>
-                      <li className="mt-auto">
-                        <div className="flex items-center gap-x-4 px-2 py-3 text-sm font-semibold leading-6 text-gray-400">
+                      <li className="mt-auto">                        <div className="flex items-center gap-x-4 px-2 py-3 text-sm font-semibold leading-6 text-gray-400">
                           <UserIcon className="h-6 w-6" />
                           <span className="truncate">{user.displayName || user.email}</span>
                         </div>
+                        
+                        {/* Mobile Theme Toggle */}
+                        <button
+                          onClick={toggleTheme}
+                          className="group flex w-full gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:text-white hover:bg-gray-800 mb-2"
+                        >
+                          {isDark ? (
+                            <SunIcon className="h-6 w-6 shrink-0" />
+                          ) : (
+                            <MoonIcon className="h-6 w-6 shrink-0" />
+                          )}
+                          {isDark ? 'Light Mode' : 'Dark Mode'}
+                        </button>
+                        
                         <button
                           onClick={signOut}
                           className="group flex w-full gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:text-white hover:bg-gray-800"
