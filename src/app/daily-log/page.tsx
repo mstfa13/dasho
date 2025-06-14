@@ -128,43 +128,50 @@ export default function DailyLog() {
       <Navigation />
       <div className="lg:pl-72">
         <main className="py-10">
-          <div className="px-4 sm:px-6 lg:px-8">
-            <div className="mb-8">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                    Daily Activity Log
-                  </h1>
-                  <p className="mt-1 text-sm text-gray-500">
-                    Track your daily activities and progress
-                  </p>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <input
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  />
+          <div className="px-4 sm:px-6 lg:px-8">            <div className="mb-8">
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 text-white shadow-xl">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <h1 className="text-3xl font-bold sm:text-4xl">
+                      Daily Activity Log 📝
+                    </h1>
+                    <p className="mt-2 text-blue-100 text-lg">
+                      Track your daily activities and build positive habits
+                    </p>
+                  </div>
+                  <div className="mt-4 sm:mt-0">
+                    <input
+                      type="date"
+                      value={date}
+                      onChange={(e) => setDate(e.target.value)}
+                      className="rounded-lg border-0 bg-white/10 text-white placeholder-blue-200 focus:bg-white/20 focus:ring-2 focus:ring-white/25 px-4 py-2 backdrop-blur-sm"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* Progress Summary */}
-            <div className="bg-white shadow rounded-lg p-6 mb-8">
+            </div>            {/* Progress Summary */}
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-6 mb-8 shadow-lg">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-medium text-gray-900">Today&apos;s Progress</h3>
-                <span className="text-2xl font-bold text-indigo-600">{completionPercentage}%</span>
+                <h3 className="text-xl font-semibold text-gray-900">Today&apos;s Progress 🎯</h3>
+                <div className="text-right">
+                  <span className="text-3xl font-bold text-green-600">{completionPercentage}%</span>
+                  <p className="text-sm text-gray-600">Complete</p>
+                </div>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-2.5">
+              <div className="w-full bg-green-200 rounded-full h-3 mb-3">
                 <div 
-                  className="bg-indigo-600 h-2.5 rounded-full transition-all duration-300"
+                  className="bg-gradient-to-r from-green-500 to-emerald-500 h-3 rounded-full transition-all duration-500 shadow-sm"
                   style={{ width: `${completionPercentage}%` }}
                 ></div>
               </div>
-              <p className="text-sm text-gray-500 mt-2">
-                {completedCount} of {activities.length} activities completed
-              </p>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-gray-600">
+                  {completedCount} of {activities.length} activities completed
+                </span>
+                <span className="text-green-700 font-medium">
+                  {activities.length - completedCount} remaining
+                </span>
+              </div>
             </div>
 
             {/* Activities List */}
@@ -243,14 +250,12 @@ export default function DailyLog() {
                       </div>
                     </div>
                   ))}
-                </div>
-
-                <div className="mt-8 flex justify-end">
+                </div>                <div className="mt-8 flex justify-end">
                   <button
                     onClick={saveActivities}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-8 py-3 rounded-xl font-semibold focus:outline-none focus:ring-4 focus:ring-indigo-300 transform hover:scale-105 transition-all duration-200 shadow-lg"
                   >
-                    Save Activities
+                    💾 Save Activities
                   </button>
                 </div>
               </div>
